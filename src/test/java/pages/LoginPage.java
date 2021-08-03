@@ -1,0 +1,32 @@
+package pages;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import utilities.ConfigReader;
+import utilities.Driver;
+
+public class LoginPage {
+
+    public LoginPage(){
+        PageFactory.initElements(Driver.getDriver(), this);
+    }
+
+    @FindBy(id = "loginUsername")
+    public WebElement usernameField;
+
+    @FindBy(id = "loginPassword")
+    public WebElement passwordField;
+
+    @FindBy(name = "loginButton")
+    public WebElement loginButton;
+
+
+    public void login(String username, String pass){
+        usernameField.sendKeys(username);
+       passwordField.sendKeys(pass);
+        loginButton.click();
+    }
+
+
+}
