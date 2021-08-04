@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import utilities.ConfigReader;
 import utilities.Driver;
 
@@ -21,6 +22,8 @@ public class LoginPage extends  PageBase{
     @FindBy(id = "hideLogin")
     public WebElement signUpLink;
 
+    @FindBy(xpath = "//span[.='Your Music']")
+    public WebElement yourMusicLink;
 
 
     public void login(String username, String pass){

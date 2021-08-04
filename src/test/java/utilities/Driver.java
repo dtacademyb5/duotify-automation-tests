@@ -22,10 +22,23 @@ public class Driver {
 
 
     public static WebDriver getDriver(){
+       return getDriver(null);
+    }
+
+
+
+    public static WebDriver getDriver(String browser){
+
+
+
 
         if(driver == null){
 
-            String browser = ConfigReader.getProperty("browser");
+
+
+            if(browser==null){
+               browser = ConfigReader.getProperty("browser");
+            }
 
             switch(browser){
 
