@@ -13,7 +13,7 @@ public class TestBase {
     WebDriver driver;
 
 
-    @BeforeMethod
+    @BeforeMethod (alwaysRun = true)
     public void setupMethod(){
         driver = Driver.getDriver();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -24,7 +24,7 @@ public class TestBase {
     }
 
 
-    @AfterMethod
+    @AfterMethod  (alwaysRun = true)
     public void tearDownMethod(){
 
         Driver.quitDriver();

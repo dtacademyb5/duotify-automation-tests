@@ -8,12 +8,21 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import utilities.ConfigReader;
 import utilities.Driver;
+import utilities.SeleniumUtils;
 
 import java.util.concurrent.TimeUnit;
 
 public class LoginTests extends TestBase{
 
-    @Test
+
+    @Test (groups = {"smoke"})
+    public void appHealthCheck(){
+
+        Assert.assertTrue(driver.getCurrentUrl().equals(ConfigReader.getProperty("url")));
+
+    }
+
+    @Test (groups = {"smoke"})
     public void positiveLogin1(){
 
         LoginPage loginPage = new LoginPage();
@@ -21,6 +30,7 @@ public class LoginTests extends TestBase{
         loginPage.usernameField.sendKeys(ConfigReader.getProperty("username1"));
         loginPage.passwordField.sendKeys(ConfigReader.getProperty("password1"));
         loginPage.loginButton.click();
+        SeleniumUtils.waitFor(2);
 
         Assert.assertTrue(driver.getCurrentUrl().equals("http://duotifyapp.us-east-2.elasticbeanstalk.com/browse.php?"));
 

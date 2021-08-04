@@ -2,6 +2,8 @@ package tests;
 
 import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -17,7 +19,7 @@ public class SignUpTests extends TestBase {
 
 
 
-    @Test
+    @Test (groups = {"smoke"})
     public void signUp(){
 
         new LoginPage().signUpLink.click();
@@ -36,6 +38,8 @@ public class SignUpTests extends TestBase {
         signUpPage.password.sendKeys(pass);
         signUpPage.password2.sendKeys(pass);
         signUpPage.registerButton.click();
+
+        new WebDriverWait(driver, 5).until(ExpectedConditions.urlToBe("http://duotifyapp.us-east-2.elasticbeanstalk.com/browse.php?"));
 
         Assert.assertTrue(driver.getCurrentUrl().equals("http://duotifyapp.us-east-2.elasticbeanstalk.com/browse.php?"));
 

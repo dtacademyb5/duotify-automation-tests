@@ -15,7 +15,7 @@ import java.util.List;
 
 public class BrowseTests extends TestBase {
 
-    @BeforeMethod
+    @BeforeMethod (alwaysRun = true)
     public void browseTestSetup(){
         new LoginPage().login(ConfigReader.getProperty("username1"), ConfigReader.getProperty("password1"));
     }
