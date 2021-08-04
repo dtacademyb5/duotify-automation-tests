@@ -6,11 +6,8 @@ import org.openqa.selenium.support.PageFactory;
 import utilities.ConfigReader;
 import utilities.Driver;
 
-public class LoginPage {
+public class LoginPage extends  PageBase{
 
-    public LoginPage(){
-        PageFactory.initElements(Driver.getDriver(), this);
-    }
 
     @FindBy(id = "loginUsername")
     public WebElement usernameField;
@@ -20,6 +17,10 @@ public class LoginPage {
 
     @FindBy(name = "loginButton")
     public WebElement loginButton;
+
+    @FindBy(id = "hideLogin")
+    public WebElement signUpLink;
+
 
 
     public void login(String username, String pass){
