@@ -22,7 +22,7 @@ public class BrowseTests extends TestBase {
 
     @Test
     public void verifyDefaultAlbums(){
-       List<String> expectedAlbumNames = Arrays.asList("Fenix", "Cruel Summer", "Ultimatum", "Werk", "Oscillation", "Marisa",
+       List<String> expectedAlbumNames = Arrays.asList("Fenix", "Crael Summer", "Ultimatum", "Werk", "Oscillation", "Marisa",
                "Clouds", "I Am...Sasha Fierce", "Escape");
 
 

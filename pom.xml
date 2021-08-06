@@ -55,6 +55,13 @@
             <version>2.11.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>5.0.8</version>
+        </dependency>
+
+
 
 
     </dependencies>
@@ -73,6 +80,8 @@
                         <suiteXmlFiles>
                             <!--suppress UnresolvedMavenProperty -->
                             <suiteXmlFile>${xmlFile}</suiteXmlFile>
+                            <!--suppress UnresolvedMavenProperty -->
+                            <suiteXmlFile>${xmlFile2}</suiteXmlFile>
                         </suiteXmlFiles>
                     </configuration>
                 </plugin>
