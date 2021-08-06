@@ -21,7 +21,7 @@ public class LoginTests extends TestBase{
 
 
         logger.info("Navigating to the homepage");
-        Assert.assertFalse(driver.getCurrentUrl().equals(ConfigReader.getProperty("url")));
+        Assert.assertTrue(driver.getCurrentUrl().equals(ConfigReader.getProperty("url")));
 
 
     }
@@ -58,7 +58,7 @@ public class LoginTests extends TestBase{
         logger.info("Logging in with the second test credentials");
         loginPage.login(ConfigReader.getProperty("username2"), ConfigReader.getProperty("password2"));
         Assert.assertTrue(driver.getCurrentUrl().equals("http://duotifyapp.us-east-2.elasticbeanstalk.com/browse.php?"));
-        throw new SkipException("skiiping");
+
 
 
 

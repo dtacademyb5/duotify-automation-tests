@@ -16,23 +16,23 @@ import org.openqa.selenium.safari.SafariDriver;
 public class Driver {
 
 
-    private static WebDriver driver;
+    private static ThreadLocal<WebDriver> drivers = new ThreadLocal<>();  // driver pool
 
     private Driver() {}
 
 
-    public static WebDriver getDriver(){
+    public static synchronized WebDriver getDriver(){
        return getDriver(null);
     }
 
 
 
-    public static WebDriver getDriver(String browser){
+    public static  WebDriver getDriver(String browser){
 
 
 
 
-        if(driver == null){
+        if(drivers.get() == null){
 
 
 
@@ -44,36 +44,36 @@ public class Driver {
 
                 case "chrome":
                     WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver();
+                    drivers.set( new ChromeDriver());
                     break;
                 case "headlessChrome":
                     ChromeOptions chromeOptions = new ChromeOptions();
                     chromeOptions.addArguments("--headless");
                     chromeOptions.addArguments("--disable-gpu");
                     WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver(chromeOptions);
+                    drivers.set( new ChromeDriver(chromeOptions));
                     break;
                 case "headlessFirefox":
                     FirefoxOptions firefoxOptions = new FirefoxOptions();
                     firefoxOptions.addArguments("--headless");
                     WebDriverManager.firefoxdriver().setup();
-                    driver = new FirefoxDriver(firefoxOptions);
+                    drivers.set( new FirefoxDriver(firefoxOptions));
                     break;
 
                 case "firefox":
                     WebDriverManager.firefoxdriver().setup();
-                    driver = new FirefoxDriver();
+                    drivers.set( new FirefoxDriver());
                     break;
                 case "edge":
                     WebDriverManager.edgedriver().setup();
-                    driver = new EdgeDriver();
+                    drivers.set( new EdgeDriver());
                     break;
                 case "ieexplorer":
                     WebDriverManager.iedriver().setup();
-                    driver = new InternetExplorerDriver();
+                    drivers.set(  new InternetExplorerDriver());
                     break;
                 case "safari":
-                    driver = new SafariDriver();
+                    drivers.set( new SafariDriver());
                     break;
                 default:
                     System.out.println("Invalid browser");;
@@ -86,14 +86,14 @@ public class Driver {
 
 
 
-        return driver;
+        return drivers.get();
     }
 
 
-    public static void quitDriver(){
-        if(driver != null){
-            driver.quit();
-            driver = null;
+    public static synchronized void quitDriver(){
+        if(drivers.get() != null){
+            drivers.get().quit();
+            drivers.remove();
         }
     }
 

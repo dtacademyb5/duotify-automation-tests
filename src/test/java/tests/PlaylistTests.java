@@ -22,7 +22,7 @@ public class PlaylistTests extends TestBase{
     @Test
     public void verifyNewPlayListCreation(){
 
-        String expectedName = "Song to listen when Automati";
+        String expectedName = "Song to listen when Automating";
         PlaylistsPage playlistsPage = new PlaylistsPage();
 
         playlistsPage.newPlayListButton.click();
