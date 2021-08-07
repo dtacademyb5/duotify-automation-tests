@@ -27,7 +27,7 @@ public class Driver {
 
 
 
-    public static  WebDriver getDriver(String browser){
+    public static  synchronized WebDriver getDriver(String browser){
 
 
 

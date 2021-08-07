@@ -12,10 +12,12 @@ import org.testng.ITestResult;
 import org.testng.annotations.*;
 import pages.LoginPage;
 import pages.SignUpPage;
+import utilities.CSVReader;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.SeleniumUtils;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
@@ -99,7 +101,7 @@ public class SignUpTests {
 
 
 
-    @Test (groups = {"flaky"})
+    @Test (groups = {"smoke"})
     public void signUp(){
 
         new LoginPage().signUpLink.click();
@@ -140,6 +142,57 @@ public class SignUpTests {
 
 
     }
+
+    @Test (dataProvider = "getData")
+    public void signUpUsingCSV(String username,String firstName, String lastName, String email, String password ){
+
+        new LoginPage().signUpLink.click();
+
+        SignUpPage signUpPage = new SignUpPage();
+
+
+
+        signUpPage.usernameField.sendKeys(username);
+        logger.info("Entering the first name");
+        signUpPage.firstName.sendKeys(firstName);
+        logger.info("Entering the last name");
+        signUpPage.lastName.sendKeys(lastName);
+        logger.info("Entering the email");
+
+
+        signUpPage.email.sendKeys(email);
+
+        logger.info("Re-Entering the email");
+        signUpPage.email2.sendKeys(email);
+
+
+        logger.info("Entering the password");
+
+        signUpPage.password.sendKeys(password);
+        logger.info("Re-Entering the password");
+
+        signUpPage.password2.sendKeys(password);
+        signUpPage.registerButton.click();
+        logger.info("Waiting till url becomes the expected");
+
+        new WebDriverWait(driver, 5).until(ExpectedConditions.urlToBe("http://duotifyapp.us-east-2.elasticbeanstalk.com/browse.php?"));
+
+        logger.info("Verifying the url is as expected");
+
+        Assert.assertTrue(driver.getCurrentUrl().equals("http://duotifyapp.us-east-2.elasticbeanstalk.com/browse.php?"));
+
+
+
+
+    }
+
+    @DataProvider
+    public Object[][] getData() throws IOException {
+        return CSVReader.readData("MOCK_DATA.csv");
+    }
+
+
+
 
 
 }
