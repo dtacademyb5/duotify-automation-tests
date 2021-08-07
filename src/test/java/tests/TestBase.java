@@ -24,7 +24,7 @@ public class TestBase {
 
 
 
-    @BeforeSuite
+    @BeforeSuite (alwaysRun = true)
     public void setupReport(){
 
         reporter =  new ExtentReports();
@@ -84,7 +84,7 @@ public class TestBase {
     }
 
 
-    @AfterSuite
+    @AfterSuite (alwaysRun = true)
     public void tearDownReport(){
         reporter.flush();
     }
