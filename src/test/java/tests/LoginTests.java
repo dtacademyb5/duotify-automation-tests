@@ -36,7 +36,7 @@ public class LoginTests extends TestBase{
         logger.info("Entering the username");
         loginPage.usernameField.sendKeys(ConfigReader.getProperty("username1"));
         logger.info("Entering the password");
-        loginPage.passwordField.sendKeys(ConfigReader.getProperty("password2"));
+        loginPage.passwordField.sendKeys(ConfigReader.getProperty("password1"));
         logger.info("Clicking onn login button");
         loginPage.loginButton.click();
         SeleniumUtils.waitFor(2);
