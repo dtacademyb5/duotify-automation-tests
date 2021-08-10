@@ -21,81 +21,22 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
-public class SignUpTests {
-
-
-    protected WebDriver driver;
-
-    protected static ExtentReports reporter;
-    protected static ExtentSparkReporter htmlReporter;
-    protected static ExtentTest logger;
-
-
-
-    @BeforeSuite (alwaysRun = true)
-    public void setupReport(){
-
-        reporter =  new ExtentReports();
-        String path =  System.getProperty("user.dir") + "/test-output/extentReports/index.html";
-        htmlReporter = new ExtentSparkReporter(path);
-        htmlReporter.config().setReportName("DUOTIFY AUTOMATION TESTS");
-
-        reporter.attachReporter(htmlReporter);
-
-        // Configuration settings
-        reporter.setSystemInfo("Tester", "John Doe");
-        reporter.setSystemInfo("Environment", "TEST_ENV");
-        reporter.setSystemInfo("Browser", ConfigReader.getProperty("browser"));
-    }
+public class SignUpTests extends TestBase{
 
 
 
 
 
-    @BeforeMethod(alwaysRun = true)
-    @Parameters("browser")
-    public void setupMethod(@Optional String browser, Method method){
-
-        driver = Driver.getDriver(browser);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get(ConfigReader.getProperty("url"));
-
-        logger = reporter.createTest("TEST CASE: " + method.getName());
-
-
-    }
-
-
-    @AfterMethod(alwaysRun = true)
-    public void tearDownMethod(ITestResult result){
-
-        if(result.getStatus()==ITestResult.SUCCESS){
-            logger.pass("PASSED: "  + result.getName());
-        }else if(result.getStatus()==ITestResult.SKIP){
-            logger.skip("SKIPPED: "  +result.getName());
-        }else if(result.getStatus()==ITestResult.FAILURE){
-            logger.fail("FAILED: "  +result.getName());
-            logger.fail(result.getThrowable());
-
-            String path = SeleniumUtils.getScreenshot("failureScreenshot");
-            logger.addScreenCaptureFromPath(path);
-
-
-
-        }
 
 
 
 
-        Driver.quitDriver();
-    }
 
 
-    @AfterSuite(alwaysRun = true)
-    public void tearDownReport(){
-        reporter.flush();
-    }
+
+
+
+
 
 
 
@@ -143,7 +84,7 @@ public class SignUpTests {
 
     }
 
-    @Test (dataProvider = "getData")
+    @Test (dataProvider = "getData", enabled = false)
     public void signUpUsingCSV(String username,String firstName, String lastName, String email, String password ){
         // not going to work second time, you need to change the data
         new LoginPage().signUpLink.click();
