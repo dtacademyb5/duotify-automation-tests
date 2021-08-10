@@ -36,7 +36,7 @@ public class LoginTests extends TestBase{
         logger.info("Entering the username");
         loginPage.usernameField.sendKeys(ConfigReader.getProperty("username1"));
         logger.info("Entering the password");
-        loginPage.passwordField.sendKeys(ConfigReader.getProperty("password1"));
+        loginPage.passwordField.sendKeys(ConfigReader.getProperty("password2"));
         logger.info("Clicking onn login button");
         loginPage.loginButton.click();
         SeleniumUtils.waitFor(2);
@@ -56,7 +56,7 @@ public class LoginTests extends TestBase{
 
         LoginPage loginPage = new LoginPage();
         logger.info("Logging in with the second test credentials");
-        loginPage.login(ConfigReader.getProperty("username2"), ConfigReader.getProperty("password2"));
+        loginPage.login(ConfigReader.getProperty("username1"), ConfigReader.getProperty("password1"));
         Assert.assertTrue(driver.getCurrentUrl().equals("http://duotifyapp.us-east-2.elasticbeanstalk.com/browse.php?"));
 
 
