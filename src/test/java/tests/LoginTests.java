@@ -38,7 +38,7 @@ public class LoginTests extends TestBase{
     }
 
 
-    @Test (groups = {"smoke"})
+    @Test (groups = {"smoke" , "SPRNT_002"} )
     public void appHealthCheck2(){
 
 

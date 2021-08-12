@@ -42,7 +42,7 @@ public class SignUpTests extends TestBase{
 
 
 
-    @Test ()
+    @Test (groups = {"SPRNT_002"})
     public void signUp(){
 
         new LoginPage().signUpLink.click();

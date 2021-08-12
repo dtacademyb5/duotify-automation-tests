@@ -20,7 +20,7 @@ public class BrowseTests extends TestBase {
         new LoginPage().login(ConfigReader.getProperty("username1"), ConfigReader.getProperty("password1"));
     }
 
-    @Test
+    @Test (groups = {"SPRNT_002"})
     public void verifyDefaultAlbums(){
        List<String> expectedAlbumNames = Arrays.asList("Fenix", "Cruel Summer", "Ultimatum", "Werk", "Oscillation", "Marisa",
                "Clouds", "I Am...Sasha Fierce", "Escape");

@@ -19,7 +19,7 @@ public class PlaylistTests extends TestBase{
     }
 
 
-    @Test
+    @Test (groups = {"SPRNT_002"})
     public void verifyNewPlayListCreation(){
 
         String expectedName = "Song to listen when Automating";
