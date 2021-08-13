@@ -58,6 +58,16 @@ public class LoginTests extends TestBase{
 
     }
 
+    @Test (groups = {"smoke" , "SPRNT_002"} )
+    public void appHealthCheck4(){
+
+
+        logger.info("Navigating to the homepage");
+        Assert.assertTrue(driver.getCurrentUrl().equals(ConfigReader.getProperty("url")));
+
+
+    }
+
 //    @Test (groups = {"smoke"})
 //    public void positiveLogin1(){
 //
