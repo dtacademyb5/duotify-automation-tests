@@ -1,7 +1,7 @@
 package tests;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
+import static org.testng.Assert.assertTrue;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -21,7 +21,7 @@ public class LoginTests extends TestBase{
 
 
         logger.info("Navigating to the homepage");
-        Assert.assertTrue(driver.getCurrentUrl().equals(ConfigReader.getProperty("url")));
+       assertTrue(driver.getCurrentUrl().equals(ConfigReader.getProperty("url")));
 
 
     }
@@ -32,7 +32,7 @@ public class LoginTests extends TestBase{
 
 
         logger.info("Navigating to the homepage");
-        Assert.assertTrue(driver.getCurrentUrl().equals(ConfigReader.getProperty("url")));
+      assertTrue(driver.getCurrentUrl().equals(ConfigReader.getProperty("url")));
 
 
     }
@@ -43,7 +43,7 @@ public class LoginTests extends TestBase{
 
 
         logger.info("Navigating to the homepage");
-        Assert.assertTrue(driver.getCurrentUrl().equals(ConfigReader.getProperty("url")));
+       assertTrue(driver.getCurrentUrl().equals(ConfigReader.getProperty("url")));
 
 
     }
@@ -53,7 +53,7 @@ public class LoginTests extends TestBase{
 
 
         logger.info("Navigating to the homepage");
-        Assert.assertTrue(driver.getCurrentUrl().equals(ConfigReader.getProperty("url")));
+        assertTrue(driver.getCurrentUrl().equals(ConfigReader.getProperty("url")));
 
 
     }
@@ -63,7 +63,7 @@ public class LoginTests extends TestBase{
 
 
         logger.info("Navigating to the homepage");
-        Assert.assertTrue(driver.getCurrentUrl().equals(ConfigReader.getProperty("url")));
+      assertTrue(driver.getCurrentUrl().equals(ConfigReader.getProperty("url")));
 
 
     }
@@ -99,7 +99,7 @@ public class LoginTests extends TestBase{
         LoginPage loginPage = new LoginPage();
         logger.info("Logging in with the second test credentials");
         loginPage.login(ConfigReader.getProperty("username1"), ConfigReader.getProperty("password1"));
-        Assert.assertTrue(driver.getCurrentUrl().equals("http://duotifyapp.us-east-2.elasticbeanstalk.com/browse.php?"));
+        assertTrue(driver.getCurrentUrl().equals("http://duotifyapp.us-east-2.elasticbeanstalk.com/browse.php?"));
 
 
 
