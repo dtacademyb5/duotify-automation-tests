@@ -9,7 +9,7 @@
 
 
         <classes>
-           <class name="tests.DataProviderTest"></class>
+           <class name="uitests.DataProviderTest"></class>
         </classes>
 
     </test> <!-- Test -->

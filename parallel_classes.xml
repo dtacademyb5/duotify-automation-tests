@@ -4,10 +4,10 @@
 
     <test name="Regression Tests UI" parallel="classes" thread-count="4">
          <classes>
-             <class name="tests.BrowseTests"></class>
-             <class name="tests.LoginTests"></class>
-             <class name="tests.SignUpTests"></class>
-             <class name="tests.PlaylistTests"></class>
+             <class name="uitests.BrowseTests"></class>
+             <class name="uitests.LoginTests"></class>
+             <class name="uitests.SignUpTests"></class>
+             <class name="uitests.PlaylistTests"></class>
          </classes>
     </test> <!-- Test -->
 

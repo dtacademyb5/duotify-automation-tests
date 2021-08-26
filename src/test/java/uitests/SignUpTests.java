@@ -1,25 +1,15 @@
-package tests;
+package uitests;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.github.javafaker.Faker;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.*;
 import pages.LoginPage;
 import pages.SignUpPage;
 import utilities.CSVReader;
-import utilities.ConfigReader;
-import utilities.Driver;
-import utilities.SeleniumUtils;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
-import java.util.concurrent.TimeUnit;
 
 public class SignUpTests extends TestBase{
 

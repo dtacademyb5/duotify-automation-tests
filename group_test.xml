@@ -13,7 +13,7 @@
 
 
        <classes>
-           <class name="tests.SignUpTests"></class>
+           <class name="uitests.SignUpTests"></class>
        </classes>
 
     </test> <!-- Test -->

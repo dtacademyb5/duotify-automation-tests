@@ -1,17 +1,10 @@
-package tests;
+package uitests;
 
-import org.openqa.selenium.WebDriver;
 import static org.testng.Assert.assertTrue;
-import org.testng.SkipException;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import utilities.ConfigReader;
-import utilities.Driver;
-import utilities.SeleniumUtils;
-
-import java.util.concurrent.TimeUnit;
 
 public class LoginTests extends TestBase{
 
