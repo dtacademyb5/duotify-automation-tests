@@ -9,6 +9,7 @@ import org.testng.asserts.SoftAssert;
 import pages.LoginPage;
 import pages.SignUpPage;
 import uitests.TestBase;
+import utilities.ConfigReader;
 import utilities.DBUtility;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class SignUpTestsDb extends TestBase {
 
 
     @Test
-    public void verifyUserSignUpThroughDatabase(){
+    public void verifyUserSignUpFlowFromUIToDatabase(){
 
         // Sign up a new user through the UI
 
@@ -90,4 +91,39 @@ public class SignUpTestsDb extends TestBase {
         softAssert.assertAll();
     }
 
-}
+
+
+    @Test
+    public void verifyUserSignUpFlowFromDatabaseToUI(){
+
+
+        // Connect to database
+        logger.info("Connect to database");
+        DBUtility.createConnection();
+        // Create a user with the details
+        logger.info("Create a user with the details");
+        String expectedUsername = new Faker().name().username();
+        String expectedPassword = "renam2021";
+
+        String query = "INSERT INTO users ( username, firstName, lastName, email, password, signUpDate, profilePic) " +
+                "values " +
+                "('"+expectedUsername+"', 'Rena', 'Mammadova', 'rena.mammadova@gmail.com', '39d175e4945aa56bf07886632264b952', '2021-08-26 00:00:00', 'assets/images/profile-pics/head' )";
+
+        DBUtility.updateQuery(query);
+        logger.info("Verify the user creation on the UI");
+        // Verify the user creation on the UI by logging in with the credentials above
+
+        LoginPage loginPage = new LoginPage();
+        logger.info("Logging in");
+        loginPage.login(expectedUsername, expectedPassword);
+        assertTrue(driver.getCurrentUrl().equals("http://duotifyapp.us-east-2.elasticbeanstalk.com/browse.php?"));
+
+        // Delete the row that was just created
+        String deleteQuery = "DELETE from users where username = '"+expectedUsername+"'";
+        DBUtility.updateQuery(deleteQuery);
+
+    }
+
+
+
+    }
