@@ -1,6 +1,7 @@
 package dbtests;
 
 import com.github.javafaker.Faker;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.testng.Assert.*;
@@ -15,7 +16,8 @@ import utilities.DBUtility;
 import java.util.List;
 import java.util.Map;
 
-public class SignUpTestsDb extends TestBase {
+public class DataMappingTests extends TestBase {
+
 
 
 
@@ -103,11 +105,17 @@ public class SignUpTestsDb extends TestBase {
         // Create a user with the details
         logger.info("Create a user with the details");
         String expectedUsername = new Faker().name().username();
-        String expectedPassword = "renam2021";
+        String expectedPassword = new Faker().internet().password();
+
+
+        String md5hash = DigestUtils.md5Hex(expectedPassword);
+
+
+
 
         String query = "INSERT INTO users ( username, firstName, lastName, email, password, signUpDate, profilePic) " +
                 "values " +
-                "('"+expectedUsername+"', 'Rena', 'Mammadova', 'rena.mammadova@gmail.com', '39d175e4945aa56bf07886632264b952', '2021-08-26 00:00:00', 'assets/images/profile-pics/head' )";
+                "('"+expectedUsername+"', 'Rena', 'Mammadova', 'rena.mammadova@gmail.com', '"+md5hash+"', '2021-08-26 00:00:00', 'assets/images/profile-pics/head' )";
 
         DBUtility.updateQuery(query);
         logger.info("Verify the user creation on the UI");
@@ -121,6 +129,7 @@ public class SignUpTestsDb extends TestBase {
         // Delete the row that was just created
         String deleteQuery = "DELETE from users where username = '"+expectedUsername+"'";
         DBUtility.updateQuery(deleteQuery);
+
 
     }
 

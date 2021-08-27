@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import utilities.ConfigReader;
+import utilities.DBUtility;
 import utilities.Driver;
 import utilities.SeleniumUtils;
 
@@ -54,6 +55,8 @@ public class TestBase {
 
         logger = reporter.createTest("TEST CASE: " + method.getName());
 
+        DBUtility.createConnection();
+
 
     }
 
@@ -78,7 +81,7 @@ public class TestBase {
 
 
 
-
+        DBUtility.close();
         Driver.quitDriver();
     }
 
