@@ -22,8 +22,7 @@ public class LoginPage extends  PageBase{
     @FindBy(id = "hideLogin")
     public WebElement signUpLink;
 
-    @FindBy(xpath = "//span[.='Your Music']")
-    public WebElement yourMusicLink;
+
 
 
     public void login(String username, String pass){

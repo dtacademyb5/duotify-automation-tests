@@ -1,18 +1,18 @@
 package dbtests;
 
+import com.mysql.cj.jdbc.exceptions.MysqlDataTruncation;
 import com.mysql.cj.log.Log;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.BrowsePage;
 import pages.LoginPage;
 import pages.PlaylistsPage;
 import uitests.TestBase;
 import utilities.DBUtility;
 import utilities.SeleniumUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.sql.SQLException;
+import java.util.*;
 
 public class BusinessRulesTest extends TestBase {
 
@@ -71,7 +71,7 @@ public class BusinessRulesTest extends TestBase {
 
 
     @Test
-    public void verifyPlaylistNameSupportsUnicodeCharsAndVerifyUpdateOnUI(){
+    public void verifyPlaylistNameSupportsUnicodeCharsAndVerifyUpdateOnUI() throws SQLException {
 
 
         String expectedName = "あおい";
@@ -91,13 +91,82 @@ public class BusinessRulesTest extends TestBase {
 
 
         new LoginPage().login("duotech", "duotech");
-        new LoginPage().yourMusicLink.click();
+        new BrowsePage().yourMusicLink.click();
 
         List<String> allPlayLists = SeleniumUtils.getElementsText(new PlaylistsPage().allPlaylistsList);
 
         Assert.assertTrue(allPlayLists.contains(expectedName));
 
 
+    }
+
+//    @Test (expectedExceptions = MysqlDataTruncation.class, expectedExceptionsMessageRegExp = "Data truncation: Out of range value for column 'plays' at row 1")
+//    public void verifyPlaysFieldRange(){
+
+    @Test ()
+    public void verifyPlaysFieldRange(){
+
+        String query = "update songs set plays='3000000000' where title='El Amante'";
+
+        try{
+            DBUtility.updateQuery(query);
+            Assert.assertTrue(false);
+        }catch(Exception e){
+            Assert.assertTrue(true);
+        }
+
+
+
+    }
+
+
+    @Test (expectedExceptions = MysqlDataTruncation.class, expectedExceptionsMessageRegExp = "Data truncation: Out of range value for column 'plays' at row 1")
+    public void verifyPlaysFieldRangewithExpectedExceptions() throws SQLException {
+
+        String query = "update songs set plays='-325642364632652346354325432' where title='El Amante'";
+        DBUtility.updateQuery(query);
+
+    }
+
+    @Test
+    public void verifyNoDuplicateUsernames(){
+
+
+        List<List<Object>> lisOflists = DBUtility.getQueryResultAsListOfLists("select username from users");
+
+
+
+
+        List<String> usernames = new ArrayList<>();
+
+
+        for (List<Object> lisOflist : lisOflists) {
+            usernames.add((String)(lisOflist.get(0)));
+        }
+
+        Collections.sort(usernames);
+
+        boolean noDuplicate = true;
+        for (int i = 0; i < usernames.size()-1; i++) {
+            if(usernames.get(i).equals(usernames.get(i+1))){
+                noDuplicate = false;
+            }
+        }
+
+        Assert.assertTrue(noDuplicate);
+    }
+
+    //select email, count(*) from users group by email having count(*)>1
+
+    @Test
+    public void verifyNoDuplicateEmails(){
+
+        List<List<Object>> lisOflists = DBUtility.getQueryResultAsListOfLists("select email, count(*) from users group by email having count(*)>1");
+
+        // If the list is empty test passes
+
+
+        Assert.assertTrue(lisOflists.isEmpty(), "The list is not empty, its size is "  + lisOflists.size());
     }
 
 

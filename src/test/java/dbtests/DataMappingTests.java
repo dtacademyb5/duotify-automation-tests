@@ -7,12 +7,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import pages.BrowsePage;
 import pages.LoginPage;
 import pages.SignUpPage;
 import uitests.TestBase;
 import utilities.ConfigReader;
 import utilities.DBUtility;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -96,7 +98,7 @@ public class DataMappingTests extends TestBase {
 
 
     @Test
-    public void verifyUserSignUpFlowFromDatabaseToUI(){
+    public void verifyUserSignUpFlowFromDatabaseToUI() throws SQLException {
 
 
         // Connect to database
@@ -129,6 +131,45 @@ public class DataMappingTests extends TestBase {
         // Delete the row that was just created
         String deleteQuery = "DELETE from users where username = '"+expectedUsername+"'";
         DBUtility.updateQuery(deleteQuery);
+
+
+    }
+
+
+    @Test
+    public void updateEmailDb() throws SQLException {
+
+
+        // Send update email query
+
+        String expectedEmail = "duotech2020@gmail.com";
+        String expectedFirstName = "Duotech";
+        String expectedLastName = "Academy";
+        String expectedUsername = "duotech";
+
+        String query = "update users set email='"+expectedEmail+"', firstName='"+expectedFirstName+"', lastName='"+expectedLastName+"' where username='"+expectedUsername+"'";
+        System.out.println(query);
+        DBUtility.updateQuery(query);
+        // Login from the UI and grab the email and verify the update
+
+        new LoginPage().login(expectedUsername, expectedUsername);
+
+        BrowsePage browsePage= new BrowsePage();
+
+        String[] s = browsePage.username.getText().split(" ");
+        String actualFirst = s[0];
+        String actualLast = s[1];
+        browsePage.username.click();
+
+        browsePage.userdetailsButton.click();
+
+        String actualEmail = browsePage.emailField.getAttribute("value");
+
+        assertEquals(actualEmail, expectedEmail);
+        assertEquals(actualFirst, expectedFirstName);
+        assertEquals(actualLast, expectedLastName);
+
+
 
 
     }
