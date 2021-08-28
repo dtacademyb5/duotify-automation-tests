@@ -41,7 +41,7 @@ public class BusinessRulesTest extends TestBase {
 
     @Test
     public void verifyTheExpectedGenresList(){
-
+        // Expected genres
         List<String> expectedGenres = Arrays.asList("rap",
                 "pop",
                 "techno" ,
