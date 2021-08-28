@@ -150,7 +150,7 @@ public class DataMappingTests extends TestBase {
         String query = "update users set email='"+expectedEmail+"', firstName='"+expectedFirstName+"', lastName='"+expectedLastName+"' where username='"+expectedUsername+"'";
         System.out.println(query);
         DBUtility.updateQuery(query);
-        // Login from the UI and grab the email and verify the update
+
 
         new LoginPage().login(expectedUsername, expectedUsername);
 
