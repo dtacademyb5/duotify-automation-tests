@@ -18,7 +18,7 @@ public class BusinessRulesTestCheckingBranching extends TestBase {
 
     @Test
     public void verifyAlbumsTableColumnNames(){
-
+        // Thus is my code to create merge conflict
         List<String> expectedColumnNames = Arrays.asList("id", "title", "artist" , "genre", "artworkPath");
 
         List<String> actualColumnNames = DBUtility.getColumnNames("select * from albums limit 1");
